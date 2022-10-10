@@ -4,6 +4,9 @@
 
 ### Author: Omar Darweesh
 ---
+### Setup 
+
+python snakes-cafe.py
 
 
 
