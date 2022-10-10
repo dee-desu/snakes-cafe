@@ -1,86 +1,51 @@
-def user_order():
-    counter = 0
+def print_menu():
+    print("***************************************\n**     welcome to the Snakes Cafe!   **\n**     Please see our menu below.    ** \n**                                   **\n** To quit at any time, type  'quit' **\n***************************************\nAppetizers\n----------\nwings\ncookies\nspring Rolls\n\nEntrees\n-------\nSalmon\nSteak\nMeat Torando\nA Literal Garden\n\nDesserts\n--------\nIce Cream\nCake\npie\n\nDrinks\n------\nCoffee\nTea\nUnicorn Tears")
+    print("***********************************\n** What would you like to order? **\n***********************************")
+
+print_menu()
+
+menu=["wings","cookies","spring rolls","salmon","steak","meat torando","a literal garden","ice cream","cake","pie","coffee","tea","unicorn tears"]
+
+def take_order():
+    added_item_arr=[]
+    final_order={}
+    items = ["wings","cookies","spring rolls","salmon","steak","meat torando","a literal garden","ice cream","cake","pie","coffee","tea","unicorn tears"]
+    values = []
+    
     while True:
-        customer_order = input("> ").title()
-        if customer_order == "Quit":
-            if counter != 0:
-                print("\nYou ordered: \n")
-                for i in final_order:
-                    if final_order[i] != 0:
-                        print(f' - {final_order[i]} {i}')
-                print("\n")
-            else:
-                print("\n")
-                print("Goodbye...")
-                print("\n")
+        order=input("> ")
+        count = 0
+       
+        if order.lower() == "quit" :
             break
-        if customer_order in final_order:
-            final_order[f"{customer_order}"] += 1
-             
-            if  final_order[f"{customer_order}"] == 1:
-                print(f"** {final_order[f'{customer_order}']} order of {customer_order} have been added to your meal **")
-            else:
-                print(f"** {final_order[f'{customer_order}']} orders of {customer_order} have been added to your meal **")
-        else:
-            print(f"Sorry {customer_order} is not available in our menu")
-        counter += 1
+      
+        if order.lower() in menu:
+            added_item_arr.append(order.lower())
+           
+            if order.lower() in added_item_arr:
+                for j in range(len(added_item_arr)) :
+                    if order.lower() == added_item_arr[j]:
+                        count+=1
+                        for i in range(len(items)):
+                            if added_item_arr[j] == items[i]:
+                                final_order[items[i]] = count
+                items_arr=[]
+                keys_arr=[]
                 
-
-
-if __name__ == "__main__":
-
-    MENU = '''
-**************************************
-**    Welcome to the Snakes Cafe!   **
-**    Please see our menu below.    **
-**
-** To quit at any time, type "quit" **
-**************************************
-
-Appetizers
-----------
-Wings
-Cookies
-Spring Rolls
-
-Entrees
--------
-Salmon
-Steak
-Meat Tornado
-A Literal Garden
-
-Desserts
---------
-Ice Cream
-Cake
-Pie
-
-Beverages
-------
-Coffee
-Tea
-Unicorn Tears
-
-***********************************
-** What would you like to order? **
-***********************************'''
-
-    final_order = {
-        "Wings": 0,
-        "Cookies": 0,
-        "Spring Rolls": 0,
-        "Salmon": 0,
-        "Steak": 0,
-        "Meat Tornado": 0,
-        "A literal Garden": 0,
-        "Ice Cream": 0,
-        "Cake": 0,
-        "Pie": 0,
-        "Coffee": 0,
-        "Tea": 0,
-        "Unicorn Tears": 0
-    }
-
-    print(MENU)
-    user_order()
+                for k in final_order.items():
+                    keys_arr.append(k)
+               
+                for values in final_order.values():
+                    items_arr.append(values)
+               
+                for l in range(len(final_order)):
+                    order_details=keys_arr[l]
+                    order_total=items_arr[l]
+                    print(f"** {order_total} order of {order_details} have been added to your meal **")
+            else:
+                count+=1
+                print(f"** {count} order of {order} have been added to your meal **")
+        elif order.lower() not in menu:
+            print(f"sorry,{order} is not available menu")
+    print(f"you order is: {final_order}")
+take_order()
